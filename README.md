@@ -9,12 +9,12 @@ There are two levels of access you can request it is important to choose the one
 An app that only requires access whilst the app is *running* should do the following.
 
  - Add the following lines to the `Info.plist`
-```
+```xml
 <key>NSLocationWhenInUseUsageDescription</key>
 <string>This is a very clear and convincing explanation of why this app needs to know the users location</string>
 ```
  - Trigger a request for permission to make use of the users current location (whilst the app is running in the foreground) at an appropriate time.
-```
+```swift
 manager.requestWhenInUseAuthorization()
 ```
 
@@ -22,19 +22,19 @@ An app that requires access whilst the app is *not running* should do the follow
 
 1. Add the following lines to the `Info.plist`
 
-```
+```xml
 <key>NSLocationAlwaysUsageDescription</key>
 <string>This is a very clear and even more convincing explanation of why this app needs to know the users location whilst in the app is in the background, because users do not want to be tracked!</string>
 ```
  - Trigger a request for permission to make use of the users current location (whilst the app is running or in the background) at an appropriate time.
-```
+```swift
 manager.requestAlwaysAuthorization()
 ```
 ## Authorisation Status
 
 In order to provide the best user experience it is often necessary to determine the current authorisation status.  This can bee done by calling the following method.
 
-```
+```swift
 CLLocationManager.authorizationStatus()
 ```
 
@@ -53,7 +53,7 @@ Once the user has denied permission to use location services, the app may not re
 
 When a user has denied your app access to location it is important to provide appropriate feedback given possibley critical features of your app will not work.  In combination with proper user feedback it is often helpful to guide the user to location where they might authorise the app.  This can be done by launching the app settings screen where on recent versions of iOS the user may update the authorisation for the app.
 
-```
+```swift
 if CLLocationManager.authorizationStatus() == .Denied {
   if let appSettings = NSURL(string: UIApplicationOpenSettingsURLString) {
     UIApplication.sharedApplication().openURL(appSettings)
